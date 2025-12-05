@@ -1,5 +1,10 @@
 # pfSense Benchmark Tool
 
+[![CI](https://github.com/remeadows/pfsense-benchmark-tool/workflows/CI/badge.svg)](https://github.com/remeadows/pfsense-benchmark-tool/actions)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+
 A Flask web application for conducting pfSense CIS/STIG security benchmark assessments. Track compliance across multiple pfSense devices, run automated checks via SSH, and generate compliance reports.
 
 ## Features
