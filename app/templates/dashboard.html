@@ -1,0 +1,65 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<h1>Dashboard</h1>
+<h5 class="text-muted">Device: {{ device.name }}{% if device.hostname %} ({{ device.hostname }}){% endif %}</h5>
+
+<div class="mb-3">
+    <a class="btn btn-secondary btn-sm" href="{{ url_for('device_checklist', device_id=device.id) }}">
+        &laquo; Back to Checklist
+    </a>
+</div>
+
+<div class="row g-3">
+    {% for key, value in summary.items() if key in [
+        'total_items', 'reviewed', 'not_reviewed',
+        'compliant', 'non_compliant', 'non_applicable',
+        'compliance_pct'
+    ] %}
+    <div class="col-md-3">
+        <div class="card shadow-sm">
+            <div class="card-body text-center">
+                <div class="text-muted text-uppercase small">{{ key.replace('_',' ') }}</div>
+                <div class="fs-3 fw-bold">{{ value }}</div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<hr class="my-4">
+
+<div class="row">
+    <div class="col-md-6">
+        <h5>Status Distribution</h5>
+        <canvas id="statusChart"></canvas>
+    </div>
+    <div class="col-md-6">
+        <h5>Non-Compliant by Section</h5>
+        <canvas id="sectionChart"></canvas>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    const statusData = {{ summary.status_counts | tojson }};
+    const sectionData = {{ summary.section_non_compliant | tojson }};
+
+    new Chart(document.getElementById('statusChart'), {
+        type: 'pie',
+        data: {
+            labels: Object.keys(statusData),
+            datasets: [{ data: Object.values(statusData) }]
+        }
+    });
+
+    new Chart(document.getElementById('sectionChart'), {
+        type: 'bar',
+        data: {
+            labels: Object.keys(sectionData),
+            datasets: [{ data: Object.values(sectionData) }]
+        }
+    });
+</script>
+
+{% endblock %}

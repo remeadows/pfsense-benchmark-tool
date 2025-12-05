@@ -1,0 +1,11 @@
+Tool creation "PfSense Benchmark Tool"
+
+1. The tool should work like STIG Viewer with the benchmark requirements as a check list. The tool will give a visual of overall compliance of the device being checked. 
+
+2. A desktop application that can run on Windows, Linux or MacOS
+
+3. What is the recommended path for configuration? I have access to Python, Powershell, Rhel 9.6, Windows 11, and MacOS.
+
+4. Objects include devices, checklists (in excel currently) and reviewers. 
+
+5. Recommendation? 

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html data-bs-theme="light">
+<head>
+    <meta charset="utf-8">
+    <title>{{ title or "PfSense Benchmark Tool" }}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { padding-bottom: 40px; }
+        .status-badge {
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        .status-Compliant { background: #d4edda; color: #155724; }
+        .status-NonCompliant { background: #f8d7da; color: #721c24; }
+        .status-NonApplicable { background: #e2e3e5; color: #41464b; }
+        .status-NotReviewed { background: #fff3cd; color: #856404; }
+    </style>
+</head>
+
+<body class="bg-body">
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+    <div class="container-fluid">
+        <a class="navbar-brand fw-bold" href="/devices">PfSense Benchmark Tool</a>
+
+        <button class="btn btn-outline-light btn-sm" id="themeToggle">
+            🌙 Dark Mode
+        </button>
+    </div>
+</nav>
+
+<div class="container">
+    {% block content %}{% endblock %}
+</div>
+
+<script>
+    const toggle = document.getElementById("themeToggle");
+    const html = document.documentElement;
+
+    toggle.addEventListener("click", () => {
+        const current = html.getAttribute("data-bs-theme");
+        const newTheme = current === "light" ? "dark" : "light";
+        html.setAttribute("data-bs-theme", newTheme);
+        toggle.textContent = newTheme === "light" ? "🌙 Dark Mode" : "☀️ Light Mode";
+    });
+</script>
+
+</body>
+</html>

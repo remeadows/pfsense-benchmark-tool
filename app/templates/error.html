@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+
+{% block title %}Error - pfSense Benchmark Tool{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="alert alert-danger" role="alert">
+        <h4 class="alert-heading">Error {{ error_code }}</h4>
+        <p>{{ error_message }}</p>
+        {% if error_details %}
+        <hr>
+        <p class="mb-0">{{ error_details }}</p>
+        {% endif %}
+    </div>
+    <a href="{{ url_for('devices') }}" class="btn btn-primary">Return to Devices</a>
+</div>
+{% endblock %}

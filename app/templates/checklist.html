@@ -1,0 +1,45 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<h1>Checklist</h1>
+<h5 class="text-muted">Device: {{ device.name }}{% if device.hostname %} ({{ device.hostname }}){% endif %}</h5>
+
+<div class="mb-3">
+    <a class="btn btn-outline-secondary btn-sm" href="{{ url_for('device_dashboard', device_id=device.id) }}">Dashboard</a>
+    <a class="btn btn-outline-secondary btn-sm" href="{{ url_for('device_export_csv', device_id=device.id) }}">Export CSV</a>
+    <a class="btn btn-outline-secondary btn-sm" href="{{ url_for('device_report', device_id=device.id) }}">PDF Report</a>
+    <a class="btn btn-outline-primary btn-sm" href="{{ url_for('device_autocheck', device_id=device.id) }}">Run Auto-Checks</a>
+</div>
+
+
+<table class="table table-bordered table-hover">
+    <thead class="table-dark">
+        <tr>
+            <th>Section</th>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Status</th>
+            <th>Comment</th>
+        </tr>
+    </thead>
+
+    {% for item in items %}
+    <tr>
+        <td>{{ item.section }}</td>
+        <td>{{ item.control_id }}</td>
+        <td>
+            <a href="{{ url_for('device_item_detail', device_id=device.id, item_index=item.index) }}">
+                {{ item.title }}
+            </a>
+        </td>
+        <td>
+            <span class="status-badge status-{{ item.status.replace(' ', '') }}">
+                {{ item.status }}
+            </span>
+        </td>
+        <td>{{ item.comment }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}
